@@ -1,8 +1,21 @@
+import { useThree } from "@react-three/fiber";
 import { Spinning, Floating, StandardReality } from "spacesvr";
-import TransparentFloor from "ideas/TransparentFloor";
-import CloudySky from "ideas/CloudySky";
+import { Globals } from "@react-spring/shared";
+import { useEffect } from "react";
+
+function Test() {
+  const { camera } = useThree();
+  console.log(camera);
+  return <></>;
+}
 
 export default function Starter() {
+  useEffect(() => {
+    Globals.assign({
+      frameLoop: "always",
+    });
+  }, []);
+
   return (
     <StandardReality>
       <ambientLight />
@@ -15,9 +28,8 @@ export default function Starter() {
             </mesh>
           </Spinning>
         </Floating>
+        <Test />
       </group>
-      <CloudySky color="white" />
-      <TransparentFloor opacity={0.7} />
     </StandardReality>
   );
 }
